@@ -2,7 +2,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Users, User, LogOut, ShieldAlert, GraduationCap } from "lucide-react";
+import { LayoutDashboard, Users, User, LogOut, ShieldAlert, Shield, Calendar, Landmark, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface AppLayoutProps {
@@ -28,6 +28,8 @@ const AppLayout = ({ children }: AppLayoutProps) => {
     { to: "/student", label: "Dashboard", icon: LayoutDashboard },
     { to: "/student/profile", label: "Profile", icon: User },
     { to: "/student/risk", label: "Risk Analysis", icon: ShieldAlert },
+    { to: "/student/schedule", label: "Smart Schedule", icon: Calendar },
+    { to: "/student/schemes", label: "Schemes & Aid", icon: Landmark },
   ];
 
   const links = role === "admin" ? adminLinks : studentLinks;
@@ -35,14 +37,14 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
-      <aside className="hidden md:flex w-64 flex-col gradient-sidebar text-sidebar-foreground">
-        <div className="flex items-center gap-2.5 px-6 py-5 border-b border-sidebar-border">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-primary">
-            <GraduationCap className="h-5 w-5 text-primary-foreground" />
+      <aside className="hidden md:flex w-64 flex-col gradient-sidebar border-r border-border">
+        <div className="flex items-center gap-2.5 px-6 py-5 border-b border-border">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-primary neon-glow">
+            <Shield className="h-5 w-5 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-sm font-bold text-sidebar-primary-foreground">EduGuard AI</h1>
-            <p className="text-[11px] text-sidebar-foreground/60">Dropout Prevention</p>
+            <h1 className="text-sm font-bold text-foreground font-display">Proactive Guard</h1>
+            <p className="text-[11px] text-muted-foreground">Dropout Prevention</p>
           </div>
         </div>
 
@@ -54,10 +56,10 @@ const AppLayout = ({ children }: AppLayoutProps) => {
                 key={link.to}
                 to={link.to}
                 className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
                   active
-                    ? "bg-sidebar-accent text-sidebar-primary-foreground"
-                    : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                    ? "bg-primary/15 text-primary border border-primary/20"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                 )}
               >
                 <link.icon className="h-4 w-4" />
@@ -67,10 +69,10 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           })}
         </nav>
 
-        <div className="px-3 py-4 border-t border-sidebar-border">
+        <div className="px-3 py-4 border-t border-border">
           <button
             onClick={handleLogout}
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-colors"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
           >
             <LogOut className="h-4 w-4" />
             Sign Out
@@ -80,19 +82,19 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 
       {/* Mobile header */}
       <div className="flex flex-1 flex-col overflow-hidden">
-        <header className="flex md:hidden items-center justify-between border-b bg-card px-4 py-3">
+        <header className="flex md:hidden items-center justify-between border-b border-border bg-card px-4 py-3">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-primary">
-              <GraduationCap className="h-4 w-4 text-primary-foreground" />
+              <Shield className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="text-sm font-bold">EduGuard AI</span>
+            <span className="text-sm font-bold font-display">Proactive Guard</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             {links.map(link => {
               const active = location.pathname === link.to;
               return (
                 <Link key={link.to} to={link.to}>
-                  <Button variant={active ? "default" : "ghost"} size="sm">
+                  <Button variant={active ? "default" : "ghost"} size="sm" className={active ? "gradient-primary" : ""}>
                     <link.icon className="h-4 w-4" />
                   </Button>
                 </Link>

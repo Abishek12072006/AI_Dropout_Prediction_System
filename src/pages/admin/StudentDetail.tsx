@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useData } from "@/contexts/DataContext";
 import RiskBadge from "@/components/RiskBadge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, AlertTriangle, BookOpen, Wallet, UserCheck, MessageCircle } from "lucide-react";
+import { ArrowLeft, AlertTriangle, BookOpen, Wallet, UserCheck, MessageCircle, Library } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const interventionIcons = {
@@ -30,7 +30,6 @@ const StudentDetail = () => {
         <ArrowLeft className="h-4 w-4" /> Back
       </Button>
 
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold font-display">{student.name}</h1>
@@ -39,8 +38,7 @@ const StudentDetail = () => {
         <RiskBadge level={student.riskCategory} score={student.riskScore} size="lg" />
       </div>
 
-      {/* Risk Score Bar */}
-      <div className="rounded-xl border bg-card p-5 shadow-sm">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
         <h3 className="text-sm font-semibold mb-3">Risk Score</h3>
         <div className="h-4 rounded-full bg-muted overflow-hidden">
           <div
@@ -58,8 +56,7 @@ const StudentDetail = () => {
         </div>
       </div>
 
-      {/* AI Explanation */}
-      <div className="rounded-xl border bg-card p-5 shadow-sm border-l-4 border-l-primary">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-sm border-l-4 border-l-primary">
         <div className="flex items-start gap-3">
           <AlertTriangle className={cn(
             "h-5 w-5 mt-0.5 shrink-0",
@@ -73,7 +70,7 @@ const StudentDetail = () => {
             {student.riskFactors.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-3">
                 {student.riskFactors.map((f, i) => (
-                  <span key={i} className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">{f}</span>
+                  <span key={i} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">{f}</span>
                 ))}
               </div>
             )}
@@ -81,34 +78,36 @@ const StudentDetail = () => {
         </div>
       </div>
 
-      {/* Profile Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
           { label: "Attendance", value: `${student.attendance}%` },
           { label: "Avg Marks", value: avgMarks },
           { label: "Assignments", value: `${student.assignmentCompletion}%` },
           { label: "Engagement", value: `${student.engagementScore}/100` },
+          { label: "Library Usage", value: `${student.libraryUsage}/mo` },
+          { label: "Orientation", value: `${student.orientationAttendance}%` },
           { label: "Income Range", value: student.familyIncomeRange },
+          { label: "Caste", value: student.caste },
           { label: "Commute", value: `${student.commuteDistance} km` },
           { label: "Internet", value: student.internetAccess ? "Yes" : "No" },
+          { label: "Chronotype", value: student.chronotype },
           { label: "Year", value: student.year },
         ].map(item => (
-          <div key={item.label} className="rounded-lg border bg-card p-3.5 shadow-sm">
+          <div key={item.label} className="rounded-lg border border-border bg-card p-3.5 shadow-sm">
             <p className="text-xs text-muted-foreground">{item.label}</p>
             <p className="text-lg font-semibold mt-0.5">{item.value}</p>
           </div>
         ))}
       </div>
 
-      {/* Marks History */}
-      <div className="rounded-xl border bg-card p-5 shadow-sm">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
         <h3 className="text-sm font-semibold mb-3">Internal Marks History</h3>
         <div className="flex items-end gap-3 h-24">
           {student.internalMarks.map((m, i) => (
             <div key={i} className="flex flex-col items-center gap-1 flex-1">
               <span className="text-xs font-semibold">{m}</span>
               <div
-                className="w-full rounded-t-md bg-primary/80 transition-all"
+                className="w-full rounded-t-md bg-primary/60 transition-all"
                 style={{ height: `${(m / 100) * 80}px` }}
               />
               <span className="text-[10px] text-muted-foreground">Test {i + 1}</span>
@@ -117,14 +116,13 @@ const StudentDetail = () => {
         </div>
       </div>
 
-      {/* Interventions */}
-      <div className="rounded-xl border bg-card p-5 shadow-sm">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
         <h3 className="text-sm font-semibold mb-4">Intervention Management</h3>
         <div className="space-y-3">
           {student.interventions.map(intervention => {
             const Icon = interventionIcons[intervention.type];
             return (
-              <div key={intervention.id} className="flex items-start gap-3 rounded-lg border p-4">
+              <div key={intervention.id} className="flex items-start gap-3 rounded-lg border border-border p-4">
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
                   <Icon className="h-4 w-4" />
                 </div>
