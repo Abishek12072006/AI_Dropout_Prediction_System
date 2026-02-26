@@ -34,7 +34,7 @@ const StudentList = () => {
             placeholder="Search by name or register number..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="pl-9"
+            className="pl-9 bg-secondary/50 border-border"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -58,11 +58,11 @@ const StudentList = () => {
         </div>
       </div>
 
-      <div className="rounded-xl border bg-card shadow-sm overflow-hidden animate-fade-in">
+      <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden animate-fade-in">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b bg-muted/40 text-left text-muted-foreground">
+              <tr className="border-b border-border bg-secondary/40 text-left text-muted-foreground">
                 <th className="px-5 py-3 font-medium">Name</th>
                 <th className="px-5 py-3 font-medium">Register No.</th>
                 <th className="px-5 py-3 font-medium">Department</th>
@@ -73,9 +73,9 @@ const StudentList = () => {
                 <th className="px-5 py-3 font-medium"></th>
               </tr>
             </thead>
-            <tbody className="divide-y">
+            <tbody className="divide-y divide-border">
               {filtered.map((s, i) => (
-                <tr key={s.id} className="hover:bg-muted/30 transition-colors" style={{ animationDelay: `${i * 50}ms` }}>
+                <tr key={s.id} className="hover:bg-secondary/30 transition-colors" style={{ animationDelay: `${i * 50}ms` }}>
                   <td className="px-5 py-3.5 font-medium">{s.name}</td>
                   <td className="px-5 py-3.5 font-mono text-xs text-muted-foreground">{s.registerNumber}</td>
                   <td className="px-5 py-3.5 text-muted-foreground">{s.department}</td>

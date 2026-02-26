@@ -13,6 +13,8 @@ import StudentDetail from "@/pages/admin/StudentDetail";
 import StudentDashboard from "@/pages/student/StudentDashboard";
 import StudentProfile from "@/pages/student/StudentProfile";
 import StudentRisk from "@/pages/student/StudentRisk";
+import SmartSchedule from "@/pages/student/SmartSchedule";
+import GovernmentSchemes from "@/pages/student/GovernmentSchemes";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +48,8 @@ const App = () => (
               <Route path="/student" element={<ProtectedRoute requiredRole="student"><StudentDashboard /></ProtectedRoute>} />
               <Route path="/student/profile" element={<ProtectedRoute requiredRole="student"><StudentProfile /></ProtectedRoute>} />
               <Route path="/student/risk" element={<ProtectedRoute requiredRole="student"><StudentRisk /></ProtectedRoute>} />
+              <Route path="/student/schedule" element={<ProtectedRoute requiredRole="student"><SmartSchedule /></ProtectedRoute>} />
+              <Route path="/student/schemes" element={<ProtectedRoute requiredRole="student"><GovernmentSchemes /></ProtectedRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

@@ -1,7 +1,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { useData } from "@/contexts/DataContext";
 import RiskBadge from "@/components/RiskBadge";
-import { AlertTriangle, TrendingDown, BookOpen, Wallet, UserCheck, MessageCircle } from "lucide-react";
+import { AlertTriangle, TrendingDown, BookOpen, Wallet, UserCheck, MessageCircle, Library } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const interventionIcons = {
@@ -29,7 +29,7 @@ const StudentRisk = () => {
       </div>
 
       {/* Score bar */}
-      <div className="rounded-xl border bg-card p-5 shadow-sm">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
         <h3 className="text-sm font-semibold mb-3">Risk Score: {student.riskScore} / 100</h3>
         <div className="h-5 rounded-full bg-muted overflow-hidden">
           <div
@@ -48,7 +48,7 @@ const StudentRisk = () => {
       </div>
 
       {/* Explanation */}
-      <div className="rounded-xl border bg-card p-5 shadow-sm border-l-4 border-l-primary">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-sm border-l-4 border-l-primary">
         <div className="flex items-start gap-3">
           <AlertTriangle className={cn(
             "h-5 w-5 mt-0.5 shrink-0",
@@ -65,14 +65,14 @@ const StudentRisk = () => {
 
       {/* Contributing factors */}
       {student.riskFactors.length > 0 && (
-        <div className="rounded-xl border bg-card p-5 shadow-sm">
+        <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
           <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
             <TrendingDown className="h-4 w-4 text-muted-foreground" />
             Contributing Factors
           </h3>
           <div className="space-y-2">
             {student.riskFactors.map((f, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-lg bg-muted/50 p-3">
+              <div key={i} className="flex items-center gap-3 rounded-lg bg-secondary/50 p-3">
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">{i + 1}</span>
                 <span className="text-sm">{f}</span>
               </div>
@@ -83,13 +83,13 @@ const StudentRisk = () => {
 
       {/* Suggested Interventions */}
       {student.interventions.length > 0 && (
-        <div className="rounded-xl border bg-card p-5 shadow-sm">
+        <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
           <h3 className="text-sm font-semibold mb-3">AI-Suggested Interventions</h3>
           <div className="space-y-3">
             {student.interventions.map(intervention => {
               const Icon = interventionIcons[intervention.type];
               return (
-                <div key={intervention.id} className="flex items-start gap-3 rounded-lg border p-4">
+                <div key={intervention.id} className="flex items-start gap-3 rounded-lg border border-border p-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
                     <Icon className="h-4 w-4" />
                   </div>

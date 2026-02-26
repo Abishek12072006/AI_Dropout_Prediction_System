@@ -12,7 +12,7 @@ interface StatCardProps {
 const StatCard = ({ title, value, subtitle, icon, variant = "default", className }: StatCardProps) => {
   return (
     <div className={cn(
-      "rounded-xl border bg-card p-5 shadow-sm animate-fade-in",
+      "rounded-xl border border-border bg-card p-5 shadow-sm animate-fade-in",
       className,
     )}>
       <div className="flex items-start justify-between">
